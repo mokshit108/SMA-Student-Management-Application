@@ -1,0 +1,65 @@
+﻿@model Crudapp.Models.CourseView
+
+
+@{
+    ViewData["Title"] = "Create Course";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddCourse" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CId" />
+            <!--<div class="form-group">
+                <label asp-for="SRollno" class="control-label"></label>
+                <input asp-for="SRollno" class="form-control" />
+                <span asp-validation-for="SRollno" class="text-danger"></span>
+            </div>-->
+
+
+            <div class="form-group">
+                <label class="control-label">Department</label>
+                <select id="DepId" class="form-control" asp-for="DepId" asp-items="@ViewBag.departmentList"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CCode" class="control-label"></label>
+                <input asp-for="CCode" class="form-control" />
+                <span asp-validation-for="CCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CName" class="control-label"></label>
+                <input asp-for="CName" class="form-control" />
+                <span asp-validation-for="CName" class="text-danger"></span>
+            </div>
+            <!--            <div class="form-group">
+                <label asp-for="DepCode" class="control-label"></label>
+                <input asp-for="DepCode" class="form-control" />
+                <span asp-validation-for="DepCode" class="text-danger"></span>
+            </div>
+
+                -->
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary rounded-sm" asp-action="Index">Back</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

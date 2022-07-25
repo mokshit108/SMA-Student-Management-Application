@@ -1,0 +1,68 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewData["Title"] = "List Of Courses";
+}
+
+
+<div class="jumbotron bg-warning text-white">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+</div>
+
+
+
+<table class="table table-bordered ">
+    <thead class="thead-light">
+        <tr>
+            
+            <th>
+                Course Code
+            </th>
+            <th>
+                Course Name
+            </th>
+            <th>
+             Actions
+            </th>
+                <th>
+                    Students
+                </th>
+
+            </tr>
+        </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Rows.Count; i++)
+        {
+
+        <tr>
+
+            
+            <td>
+                @*@{ @Model.Rows[i]["DepCode"].ToString()+Model.Rows[i]["CCode"].ToString()}-->*@
+                @*@(Model.address + " " + Model.city)*@
+                @* @Model.Rows[i]["DepCode"]+ " "+@Model.Rows[i]["CCode"]*@
+                @Model.Rows[i]["CCode"]
+
+
+
+            </td>
+            <td>
+                @Model.Rows[i]["CName"]
+            </td>
+
+            <td>
+                <a class="btn btn-info btn-sm" asp-action="CAdd" asp-route-id="@Model.Rows[i]["DepId"]">Create New</a> 
+
+                <a class="btn btn-secondary btn-sm" asp-action="CEdit" asp-route-id="@Model.Rows[i]["CId"]">Edit</a> 
+                <a class="btn btn-danger btn-sm" asp-action="CDelete" asp-route-id="@Model.Rows[i]["CId"]">Delete</a>
+            </td>
+
+            <td>
+                <a class="btn btn-primary btn-sm" asp-action="FindStudents" asp-route-id="@Model.Rows[i]["CId"]">Student</a>
+
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

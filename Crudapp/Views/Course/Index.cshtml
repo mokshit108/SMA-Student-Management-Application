@@ -1,0 +1,48 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewData["Title"] = "List Of Courses";
+}
+<div class="jumbotron">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+</div>
+
+
+
+<table class="table table-bordered ">
+    <thead class="thead-light">
+        <tr>
+            <th>
+                CCode
+            </th>
+            <th>
+                Course Name
+            </th>
+            <th>
+                <a class="btn btn-primary" asp-area="" asp-action="AddCourse">Add Course</a>
+            </th>
+
+
+
+
+
+
+
+        </tr>
+        
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Rows.Count; i++)
+        {
+
+            <tr>
+                <td>
+                    @Model.Rows[i]["CCode"]
+                </td>
+                <td>
+                    @Model.Rows[i]["CName"]
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

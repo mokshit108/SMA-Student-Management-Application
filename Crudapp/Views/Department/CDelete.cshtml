@@ -1,0 +1,34 @@
+﻿@model Crudapp.Models.CourseView
+
+@{
+    ViewData["Title"] = "Delete Course";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CName)
+        </dd>
+   
+    </dl>
+
+    <form asp-action="CDelete">
+        <input type="hidden" asp-for="DepId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        <a class="btn btn-secondary rounded-sm" asp-action="Index">Back</a>
+    </form>
+</div>

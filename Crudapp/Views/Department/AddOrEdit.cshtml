@@ -1,0 +1,74 @@
+﻿@model Crudapp.Models.DepartmentView
+
+
+@{
+    ViewData["Title"] = Model.DepId == 0 ? "Create Department" : "Update Department";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEdit" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input id="getDepId" type="hidden" asp-for="DepId" />
+            <div class="form-group" required>
+                <label asp-for="DepCode" class="control-label">Department Code</label>
+                <input id="getDepCode" asp-for="DepCode" class="form-control" />
+                <span asp-validation-for="DepCode" class="text-danger"></span>
+
+
+            </div>
+
+            <div class="form-group" required>
+                <label asp-for="DName" class="control-label">Department Name</label>
+                <input asp-for="DName" class="form-control" />
+                <span asp-validation-for="DName" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-success" />
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div>
+    <a class="btn btn-secondary rounded-sm" asp-action="Index">Back</a>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var loc = window.location.href;
+        var id = loc.substring(loc.lastIndexOf('/') + 1);
+        console.log(id);
+        if (id>0) {
+            $("#getDepCode").change(function () {
+                $("#getDepCode").attr('data-val', false);
+                console.log("You are in edit mode");
+            });
+        }
+        else {
+            $("#getDepCode").change(function () {
+                $("#getDepCode").attr('data-val', true);
+                console.log("You are in create mode");
+            });
+        }
+
+
+    });
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

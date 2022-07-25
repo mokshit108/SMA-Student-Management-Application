@@ -1,0 +1,73 @@
+﻿@model Crudapp.Models.StudentView
+
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<hr />
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddStudent" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="StudentId" />
+
+            <div class="form-group">
+                <label asp-for="DepId" class="control-label">Department</label>
+                <select id="ddldepartment" class="form-control" asp-for="DepId" asp-items="@ViewBag.departmentList"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CId" class="control-label">Course</label>
+                <select id="ddlcourse" class="form-control" asp-for="CId" asp-items="@(new SelectList(string.Empty, "Value", "Text" ))"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SRollno" class="control-label"></label>
+                <input asp-for="SRollno" class="form-control" />
+                <span asp-validation-for="SRollno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SName" class="control-label"></label>
+                <input asp-for="SName" class="form-control" />
+                <span asp-validation-for="SName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-success"  />
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#ddldepartment").change(function () {
+            $.getJSON("/Student/GetCourse", { id: $("#ddldepartment").val() }, function (d) {
+                var row = "";
+                $("#ddlcourse").empty();
+                $.each(d, function (i, v) {
+                    row += "<option value=" + v.value + ">" + v.text + "</option>";
+                });
+                $("#ddlcourse").html(row);
+            })
+        })
+
+
+    })
+</script>
+<div>
+    <a class="btn btn-secondary rounded-sm" asp-action="Index">Back</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
